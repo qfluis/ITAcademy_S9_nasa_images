@@ -1,2 +1,2 @@
-<app-date-bar></app-date-bar>
-<app-picture-of-the-day></app-picture-of-the-day>
+<app-date-bar (onChangeDate)="updateDate( $event )"></app-date-bar>
+<app-picture-of-the-day [date]="date"></app-picture-of-the-day>
