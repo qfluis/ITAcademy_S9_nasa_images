@@ -21,25 +21,44 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   }
 
   ngAfterContentInit(): void {
-    //this.chargePicture();
+    this.chargePicture();
     //this.pictureImg.nativeElement.src = "/assets/img/loading-gif.gif";
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    //this.chargePicture();
+    this.chargePicture();
     //console.log(this.date);
   }
 
   chargePicture(){
-    this.pictureImg.nativeElement.src = "/assets/img/loading-gif.gif";
+    
     //this.pictureImg.nativeElement.hidden = true;
     this.pictureOfTheDay.getPictureOfOneDay(this.date).subscribe((resp:Picture)=> {
       this.picture = resp;
+      this.pictureImg.nativeElement.src = "/assets/img/loading-gif.gif";
+      console.log("preload", this.picture.url);
+      
+      this.pictureImg.nativeElement.classList.add("invisible");
+      
+
+      //this.preload(this.picture.url || "/assets/img/img_broken.webp");
       this.pictureImg.nativeElement.src = this.picture.url || "/assets/img/img_broken.webp";
+
     });
   }
 
   showImage(){
+    this.pictureImg.nativeElement.classList.remove("invisible");
     console.log("cargada");
   }
+
+  /*
+  preload(url:string) {
+    fetch(url).then(request => request.blob()).then(() => {
+      this.pictureImg.nativeElement.src = url;
+      console.log("img cargada");
+    });
+  }
+  */
+
 }
