@@ -1,7 +1,7 @@
 <br>
 <h2>{{ picture.title }}</h2>
-<div #pictureContainer class="img-container"> <!-- *ngIf="picture.media_type == 'image'" -->
-<img  #pictureImg class="img-fluid rounded mx-auto" (load)="showImage()">
+<div #pictureContainer class="img-container row "> <!-- *ngIf="picture.media_type == 'image'" -->
+    <img  #pictureImg class="img-fluid rounded mx-auto" (load)="showImage()">
 </div>
 <div #videoContainer class="video-responsive"> <!-- *ngIf="picture.media_type == 'video'"  -->
     <iframe #videoImg                
@@ -18,6 +18,3 @@
 
 <p>{{ picture.explanation}}</p>
 <a *ngIf="picture.hdurl" [href]="picture.hdurl" target="_blank" class="btn btn-primary position-relative start-50 translate-middle mt-3">Download Picture in HD</a>
-
-<!-- TODO: OJO después de cargar vídeo imagen no carga, responsive video... -->
-

@@ -8,6 +8,7 @@ import { DailyComponent } from './pages/daily/daily.component';
 import { WeeklyComponent } from './pages/weekly/weekly.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SharedModule } from './shared/shared.module';
+import { DscvrEpicPictureModule } from './dscvr-epic-picture/dscvr-epic-picture.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    NasaPictureOfTheDayModule
+    NasaPictureOfTheDayModule,
+    DscvrEpicPictureModule
   ],
   providers: [],
   bootstrap: [AppComponent]

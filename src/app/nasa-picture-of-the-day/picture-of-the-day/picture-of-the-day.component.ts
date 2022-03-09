@@ -23,12 +23,12 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   }
 
   ngAfterContentInit(): void {
-    console.log("After Content Init");
+    //console.log("After Content Init");
     this.chargePicture();
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes");
+    //console.log("changes");
     this.chargePicture();
   }
 
@@ -36,7 +36,7 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
     
     //this.pictureImg.nativeElement.hidden = true;
     this.pictureOfTheDay.getPictureOfOneDay(this.date).subscribe((resp:Picture) => {
-      console.log("respuesta", resp);
+      //console.log("respuesta", resp);
       this.picture = resp;
 
 
@@ -51,16 +51,8 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
         this.videoImg.nativeElement.src = this.picture.url || "/assets/img/img_broken.webp";
 
         this.videoContainer.nativeElement.classList.remove("d-none");
-        this.pictureContainer.nativeElement.classList.add("d-none");
-        /* 
-        
-        //this.video.nativeElement.classList.add("invisible");      
-        
-        //this.pictureImg.nativeElement.classList.remove("invisible");
-        */
+        this.pictureContainer.nativeElement.classList.add("d-none");       
       }  
-
-      //TODO: OJO después de cargar vídeo imagen no carga, responsive video... vídeo 16/02/22
 
     }, (error:any) => {
 

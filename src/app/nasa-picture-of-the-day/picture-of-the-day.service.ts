@@ -29,7 +29,7 @@ export class PictureOfTheDayService {
   ) { }  
 
   getPictureOfOneDay (date:Date):Observable<Picture> {
-    console.log(`${this.ApiUrl}?api_key=${this.ApiKey}&date=${this.formatedDate(date)}`);
+    //console.log(`${this.ApiUrl}?api_key=${this.ApiKey}&date=${this.formatedDate(date)}`);
     return this.http.get<Picture>(`${this.ApiUrl}?api_key=${this.ApiKey}&date=${this.formatedDate(date)}`);
   }
 

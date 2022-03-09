@@ -1,2 +1,6 @@
 <app-date-bar (onChangeDate)="updateDate( $event )"></app-date-bar>
-<app-picture-of-the-day [date]="date"></app-picture-of-the-day>
+<div class="row">
+    <app-picture-of-the-day [date]="date" class="col"></app-picture-of-the-day>
+    <app-dscvr-epic-picture [date]="date" class="col"></app-dscvr-epic-picture>
+</div>
+<!-- TODO: OJO responsive -->
