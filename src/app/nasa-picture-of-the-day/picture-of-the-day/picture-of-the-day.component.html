@@ -1,9 +1,23 @@
-
-<!--<button (click)="chargePicture()">Eo</button>-->
+<br>
 <h2>{{ picture.title }}</h2>
-<div class="img-container">
-<a [href]="picture.url" target="_blank"><img #pictureImg class="img-fluid rounded mx-auto d-block invisible" (load)="showImage()"></a>
+<div #pictureContainer class="img-container"> <!-- *ngIf="picture.media_type == 'image'" -->
+<img  #pictureImg class="img-fluid rounded mx-auto" (load)="showImage()">
 </div>
-<p>&copy;{{ picture.copyright}}</p>
+<div #videoContainer class="video-responsive"> <!-- *ngIf="picture.media_type == 'video'"  -->
+    <iframe #videoImg                
+        width="560"
+        height="315"        
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+<p><span *ngIf="picture.copyright">&copy;</span>{{ picture.copyright}} </p>
+
 <p>{{ picture.explanation}}</p>
-<!-- TODO:OJO a veces el media_type:"image" puede ser un video -->
+<a *ngIf="picture.hdurl" [href]="picture.hdurl" target="_blank" class="btn btn-primary position-relative start-50 translate-middle mt-3">Download Picture in HD</a>
+
+<!-- TODO: OJO después de cargar vídeo imagen no carga, responsive video... -->
+

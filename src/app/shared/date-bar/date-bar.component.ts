@@ -9,14 +9,17 @@ import { PictureOfTheDayService } from 'src/app/nasa-picture-of-the-day/picture-
 export class DateBarComponent implements OnInit {
 
   date:Date;
+
+  randomDateStart = new Date ("1995-6-16");
+  randomDateEnd = new Date();
+
   @Output() onChangeDate = new EventEmitter<Date>();
   @ViewChild('inputDate') inputDate!: ElementRef<HTMLInputElement>;
 
   constructor(
     private pictureOfTheDayService: PictureOfTheDayService
   ) { 
-    this.date = new Date();
-    
+    this.date = new Date();    
   }
 
   ngOnInit(): void {
@@ -24,8 +27,24 @@ export class DateBarComponent implements OnInit {
 
   dateChanged(){
     this.date = new Date(this.inputDate.nativeElement.value);
-    //this.pictureOfTheDayService.date = this.date;
     this.onChangeDate.emit(this.date);
+  }
+
+  addDays(increment:number){
+    this.date.setDate(this.date.getDate() + increment);
+    
+    this.inputDate.nativeElement.valueAsDate = this.date ;
+    this.dateChanged();
+    
+  }
+
+  randomDate(){
+    const start = this.randomDateStart.getTime();
+    const end = this.randomDateEnd.getTime();
+    this.date = new Date( start + Math.random() * (end - start));
+
+    this.inputDate.nativeElement.valueAsDate = this.date ;
+    this.dateChanged();
   }
 
 }

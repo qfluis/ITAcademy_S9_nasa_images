@@ -10,8 +10,10 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
 
   @Input() date = new Date();
   picture:Picture={};
+  @ViewChild("pictureContainer") pictureContainer!:ElementRef<HTMLDivElement>;
   @ViewChild("pictureImg") pictureImg!: ElementRef<HTMLImageElement>;
-
+  @ViewChild("videoContainer") videoContainer!:ElementRef<HTMLDivElement>;
+  @ViewChild("videoImg") videoImg!: ElementRef<HTMLIFrameElement>;
   constructor(
     private pictureOfTheDay:PictureOfTheDayService
   ) { }
@@ -21,44 +23,60 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   }
 
   ngAfterContentInit(): void {
+    console.log("After Content Init");
     this.chargePicture();
-    //this.pictureImg.nativeElement.src = "/assets/img/loading-gif.gif";
   }
   
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes");
     this.chargePicture();
-    //console.log(this.date);
   }
 
   chargePicture(){
     
     //this.pictureImg.nativeElement.hidden = true;
-    this.pictureOfTheDay.getPictureOfOneDay(this.date).subscribe((resp:Picture)=> {
+    this.pictureOfTheDay.getPictureOfOneDay(this.date).subscribe((resp:Picture) => {
+      console.log("respuesta", resp);
       this.picture = resp;
-      this.pictureImg.nativeElement.src = "/assets/img/loading-gif.gif";
-      console.log("preload", this.picture.url);
-      
-      this.pictureImg.nativeElement.classList.add("invisible");
-      
 
-      //this.preload(this.picture.url || "/assets/img/img_broken.webp");
-      this.pictureImg.nativeElement.src = this.picture.url || "/assets/img/img_broken.webp";
+
+            
+      if (this.picture.media_type == 'image') {
+        this.pictureImg.nativeElement.classList.add("invisible");
+        this.pictureImg.nativeElement.src = this.picture.url || "/assets/img/img_broken.webp";
+
+        this.pictureContainer.nativeElement.classList.remove("d-none");
+        this.videoContainer.nativeElement.classList.add("d-none");
+      } else {
+        this.videoImg.nativeElement.src = this.picture.url || "/assets/img/img_broken.webp";
+
+        this.videoContainer.nativeElement.classList.remove("d-none");
+        this.pictureContainer.nativeElement.classList.add("d-none");
+        /* 
+        
+        //this.video.nativeElement.classList.add("invisible");      
+        
+        //this.pictureImg.nativeElement.classList.remove("invisible");
+        */
+      }  
+
+      //TODO: OJO después de cargar vídeo imagen no carga, responsive video... vídeo 16/02/22
+
+    }, (error:any) => {
+
+      this.picture = {
+        title: "Image of the day not available",
+        explanation: `${ error.error.msg } Please, try another date.`,
+        url: "/assets/img/img_broken.webp",
+        media_type: "image"
+      }
+      this.pictureImg.nativeElement.classList.add("invisible");
+      this.pictureImg.nativeElement.src = "/assets/img/img_broken.webp";
 
     });
   }
 
   showImage(){
     this.pictureImg.nativeElement.classList.remove("invisible");
-    console.log("cargada");
   }
-
-  /*
-  preload(url:string) {
-    fetch(url).then(request => request.blob()).then(() => {
-      this.pictureImg.nativeElement.src = url;
-      console.log("img cargada");
-    });
-  }
-  */
-
 }

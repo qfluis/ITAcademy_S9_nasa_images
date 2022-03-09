@@ -18,6 +18,6 @@ export class DailyComponent implements OnInit {
   updateDate( date:Date){
     this.date = date;  
     //console.log("Evento", this.date);
-  }
+  }  
 
 }
