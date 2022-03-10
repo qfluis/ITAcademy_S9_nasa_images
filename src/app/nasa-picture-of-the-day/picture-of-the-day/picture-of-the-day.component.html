@@ -1,20 +1,23 @@
-<br>
-<h2>{{ picture.title }}</h2>
-<div #pictureContainer class="img-container row "> <!-- *ngIf="picture.media_type == 'image'" -->
-    <img  #pictureImg class="img-fluid rounded mx-auto" (load)="showImage()">
-</div>
-<div #videoContainer class="video-responsive"> <!-- *ngIf="picture.media_type == 'video'"  -->
-    <iframe #videoImg                
-        width="560"
-        height="315"        
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-    </iframe>
-</div>
+<div class="border border-light pt-3 pb-3 p-sm-3 mt-3 shadow-sm rounded">
+    <h6 class="ps-3 pe-3 text-secondary">NASA Picture of the day</h6>
+    <h3 class="ps-3 pe-3 ">{{ picture.title }}</h3>
+    <hr>
+    <div #pictureContainer class="img-container row "> <!-- *ngIf="picture.media_type == 'image'" -->
+        <img  #pictureImg class="img-fluid rounded mx-auto" (load)="showImage()">
+    </div>
+    <div #videoContainer class="video-responsive"> <!-- *ngIf="picture.media_type == 'video'"  -->
+        <iframe #videoImg                
+            width="560"
+            height="315"        
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
 
-<p><span *ngIf="picture.copyright">&copy;</span>{{ picture.copyright}} </p>
+    <p><span *ngIf="picture.copyright">&copy;</span>{{ picture.copyright}} </p>
 
-<p>{{ picture.explanation}}</p>
-<a *ngIf="picture.hdurl" [href]="picture.hdurl" target="_blank" class="btn btn-primary position-relative start-50 translate-middle mt-3">Download Picture in HD</a>
+    <p>{{ picture.explanation}}</p>
+    <a *ngIf="picture.hdurl" [href]="picture.hdurl" target="_blank" class="btn btn-primary position-relative start-50 translate-middle mt-3">Download Picture in HD</a>
+</div>

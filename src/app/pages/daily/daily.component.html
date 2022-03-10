@@ -1,6 +1,7 @@
 <app-date-bar (onChangeDate)="updateDate( $event )"></app-date-bar>
 <div class="row">
-    <app-picture-of-the-day [date]="date" class="col"></app-picture-of-the-day>
-    <app-dscvr-epic-picture [date]="date" class="col"></app-dscvr-epic-picture>
+    <app-picture-of-the-day [date]="date" class="col-12 col-md-12 col-lg-6 col-xxl-4"></app-picture-of-the-day>
+    <app-dscvr-epic-picture [date]="date" class="col-12 col-md-6 col-xxl-4"></app-dscvr-epic-picture>
+    <app-nasa-rover-photos [date]="date" class="col-12 col-md-6 col-xxl-4" ></app-nasa-rover-photos>
 </div>
-<!-- TODO: OJO responsive -->
+<!-- TODO: Revisar responsive -->

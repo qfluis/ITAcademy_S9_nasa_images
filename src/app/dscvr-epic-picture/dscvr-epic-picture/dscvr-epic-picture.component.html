@@ -1,19 +1,16 @@
-<!--
-<p *ngFor="let img of earthPhotos">
-    <img [src]="img" alt="">
-</p>
--->
-<br>
-<h2>Earth {{ pictureDate }}</h2>
+<div class="border border-light pt-3 pb-3 p-sm-3 mt-3 shadow-sm rounded">
+  <h6 class="ps-3 pe-3  text-secondary">DSCVR Epic Pictures</h6>
+  <h3 class="ps-3 pe-3 ">Earth {{ pictureDate }}</h3>
+  <hr>
 
-<div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="false" >
     <div class="carousel-inner">      
       
-      <div *ngFor='let img of earthPhotos; let primero = first;' [ngClass]='{active:primero}' class="carousel-item" data-bs-interbal="100">
-        <img [src]="img" class="d-block w-100" alt="" (error)="imgError( $event )">
+      <div *ngFor='let img of earthPhotos; let primero = first;' [ngClass]='{active:primero}' class="carousel-item" >
+        <img [src]="img" loading="lazy" class="d-block w-100" alt="" (error)="imgError( $event )" (load)="imgLoad( $event )">
       </div>
       
-         
+        
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselFade" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,3 +21,4 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+</div>

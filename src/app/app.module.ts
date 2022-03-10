@@ -9,6 +9,7 @@ import { WeeklyComponent } from './pages/weekly/weekly.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SharedModule } from './shared/shared.module';
 import { DscvrEpicPictureModule } from './dscvr-epic-picture/dscvr-epic-picture.module';
+import { NasaRoverPhotosModule } from './nasa-rover-photos/nasa-rover-photos.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DscvrEpicPictureModule } from './dscvr-epic-picture/dscvr-epic-picture.
     AppRoutingModule,
     SharedModule,
     NasaPictureOfTheDayModule,
-    DscvrEpicPictureModule
+    DscvrEpicPictureModule,
+    NasaRoverPhotosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

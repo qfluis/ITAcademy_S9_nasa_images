@@ -65,11 +65,14 @@ export class DscvrEpicPictureService {
 
     console.log(date.getTime(), today.getTime());
 
+    let url:string = `${this.ApiUrl}/${this.formatedDate(date)}?api_key=${this.ApiKey}`;
+    
     if (date.getTime() == today.getTime()){
-      date.setDate(date.getDate()-1);  
-    }  
+      //date.setDate(date.getDate()-1);  
+      url = `${this.ApiUrl}?api_key=${this.ApiKey}`;
+    } 
       
-    const url:string = `${this.ApiUrl}/${this.formatedDate(date)}?api_key=${this.ApiKey}`;
+    
     console.log("holiwi",url);
     return this.http.get<EpicImage[]>(url);
   }

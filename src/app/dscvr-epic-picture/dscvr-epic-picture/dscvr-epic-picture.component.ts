@@ -48,4 +48,9 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
     event.target.src = "assets/img/epic_error.webp";
   }
 
+  imgLoad( event:any ){
+    //console.log(event.target.style.visibility);
+    event.target.style.visibility = "visible";
+  }
+
 }
