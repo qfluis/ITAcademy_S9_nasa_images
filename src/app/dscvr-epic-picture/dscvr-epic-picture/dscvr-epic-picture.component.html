@@ -1,6 +1,11 @@
 <div class="border border-light pt-3 pb-3 p-sm-3 mt-3 shadow-sm rounded">
-  <h6 class="ps-3 pe-3  text-secondary">DSCVR Epic Pictures</h6>
-  <h3 class="ps-3 pe-3 ">Earth {{ pictureDate }}</h3>
+  <div class="row align-items-center">
+    <div class="col-10">
+      <h6 class="ps-3 pe-3  text-secondary">DSCVR Epic Pictures</h6>
+      <h3 class="ps-3 pe-3 ">Earth {{ pictureDate }}</h3>
+    </div>
+    <app-like [like]="pictureFav" *ngIf="userLogedIn" class="col-2" (click)="favPicture()" ></app-like>
+  </div>
   <hr>
 
   <div id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="false" >
@@ -20,5 +25,5 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
+  </div>  
 </div>

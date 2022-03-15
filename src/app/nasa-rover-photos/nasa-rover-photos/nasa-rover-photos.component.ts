@@ -1,4 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { LoginService } from 'src/app/login/login.service';
+import { FavService } from 'src/app/shared/fav.service';
 import { MarsPhoto, MarsPhotos, NasaRoverPhotosService } from '../nasa-rover-photos.service';
 
 @Component({
@@ -11,8 +13,13 @@ export class NasaRoverPhotosComponent implements OnInit, OnChanges {
   apiCalls:number = 0;
   maxApiCalls:number = 5;
 
+  pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+  userLogedIn = this.loginService.userLogedIn;
+
   constructor(
-    private nasaRoverPhotosService:NasaRoverPhotosService
+    private nasaRoverPhotosService:NasaRoverPhotosService,
+    private loginService:LoginService,
+    private favService:FavService 
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +67,16 @@ export class NasaRoverPhotosComponent implements OnInit, OnChanges {
   imgLoad( event:any ){
     //console.log(event.target.style.visibility);
     event.target.style.visibility = "visible";
+  }
+
+  favPicture(){    
+    if (!this.pictureFav) {
+      this.favService.favPicture(this.date, 'MARS');  
+      this.pictureFav = true;
+    } else {
+      this.favService.removeFavPicture(this.date, 'MARS');
+      this.pictureFav = false;
+    }
   }
 
 

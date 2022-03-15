@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DscvrEpicPictureComponent } from './dscvr-epic-picture.component';
+import { MyFavouritesComponent } from './my-favourites.component';
 
-describe('DscvrEpicPictureComponent', () => {
-  let component: DscvrEpicPictureComponent;
-  let fixture: ComponentFixture<DscvrEpicPictureComponent>;
+describe('MyFavouritesComponent', () => {
+  let component: MyFavouritesComponent;
+  let fixture: ComponentFixture<MyFavouritesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DscvrEpicPictureComponent ]
+      declarations: [ MyFavouritesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DscvrEpicPictureComponent);
+    fixture = TestBed.createComponent(MyFavouritesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

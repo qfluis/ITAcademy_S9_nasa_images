@@ -1,4 +1,6 @@
 import { AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { LoginService } from 'src/app/login/login.service';
+import { FavService } from 'src/app/shared/fav.service';
 import { Picture, PictureOfTheDayService } from '../picture-of-the-day.service';
 
 @Component({
@@ -14,8 +16,14 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   @ViewChild("pictureImg") pictureImg!: ElementRef<HTMLImageElement>;
   @ViewChild("videoContainer") videoContainer!:ElementRef<HTMLDivElement>;
   @ViewChild("videoImg") videoImg!: ElementRef<HTMLIFrameElement>;
+
+  pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+  userLogedIn = this.loginService.userLogedIn;
+
   constructor(
-    private pictureOfTheDay:PictureOfTheDayService
+    private pictureOfTheDay:PictureOfTheDayService,
+    private loginService:LoginService,
+    private favService:FavService 
   ) { }
 
   ngOnInit(): void {
@@ -70,5 +78,15 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
 
   showImage(){
     this.pictureImg.nativeElement.classList.remove("invisible");
+  }
+
+  favPicture(){    
+    if (!this.pictureFav) {
+      this.favService.favPicture(this.date, 'NASA');  
+      this.pictureFav = true;
+    } else {
+      this.favService.removeFavPicture(this.date, 'NASA');
+      this.pictureFav = false;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DscvrEpicPictureComponent } from './dscvr-epic-picture/dscvr-epic-picture.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import { DscvrEpicPictureComponent } from './dscvr-epic-picture/dscvr-epic-pictu
     DscvrEpicPictureComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     DscvrEpicPictureComponent

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, AfterContentInit, SimpleChanges } from '@angular/core';
 import { DscvrEpicPictureService, EpicImage } from '../dscvr-epic-picture.service';
+import { LoginService } from '../../login/login.service';
+import { FavService } from '../../shared/fav.service';
 
 @Component({
   selector: 'app-dscvr-epic-picture',
@@ -10,15 +12,18 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
 
   @Input() date = new Date();
   pictureDate:string = "";
+  pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+  userLogedIn = this.loginService.userLogedIn;
 
   earthPhotos:string[]=[];
 
   constructor(
-    private dscvrEpicPicture:DscvrEpicPictureService
+    private dscvrEpicPicture:DscvrEpicPictureService,
+    private loginService:LoginService,
+    private favService:FavService
   ) { }
 
   ngOnInit(): void {
-    
   }
 
   ngAfterContentInit(): void {
@@ -51,6 +56,18 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
   imgLoad( event:any ){
     //console.log(event.target.style.visibility);
     event.target.style.visibility = "visible";
+  }
+
+  favPicture(){
+    
+    if (!this.pictureFav) {
+      this.favService.favPicture(this.date, 'EPIC');  
+      this.pictureFav = true;
+    } else {
+      this.favService.removeFavPicture(this.date, 'EPIC');
+      this.pictureFav = false;
+    }
+
   }
 
 }
