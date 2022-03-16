@@ -24,29 +24,4 @@ export class FavService {
   getFavList(){
     
   }
-  /*
-  addNasaPicture(){
-
-  }
-
-  removeNasaPicture(){
-
-  }
-
-  addEarthPicture(){
-
-  }
-
-  removeEarthPicture(){
-
-  }
-
-  addMarsPicture(){
-
-  }
-
-  removeMarsPicture(){
-
-  }*/
-
 }

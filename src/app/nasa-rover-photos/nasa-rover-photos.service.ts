@@ -74,26 +74,4 @@ export class NasaRoverPhotosService {
   formatedDate(date:Date):string {
     return date.toISOString().split("T")[0];
   }
-
-  /* TODO: BORRAR
-  formatedDateForImg(date:Date):string {
-    let result:string = this.formatedDate(date);
-    result = result.replace(/-/g,"/",);
-    return result; 
-  }
-  
-
-  getArrayImages(images:EpicImage[]):string[]{
-    const arrImg:string[] =[];
-    for (let img of images){
-      arrImg.push(this.getImageUrl(img));
-    }
-    return arrImg;
-  }
-
-  getImageUrl(image:EpicImage){
-    const date = new Date(image.date);
-    return `${this.ImagesUrl}/${this.formatedDateForImg(date)}/jpg/${image.image}.jpg?api_key=${this.ApiKey}`;
-  }  
-  */
 }

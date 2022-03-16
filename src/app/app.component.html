@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" routerLink="weekly/">Nasa Pictures</a>
+        <a class="navbar-brand" routerLink="/daily">Nasa Pictures</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,10 +14,12 @@
             <li class="nav-item">
               <a class="nav-link" href="#" routerLink="/myfavourites" routerLinkActive="active">My Fav Pictures</a>
             </li>  
-            <li class="nav-item ms-md-auto">
-              <a class="nav-link btn btn-success text-light" href="#" routerLink="/login-signup" routerLinkActive="active">LogIn/SignUp</a>
-              <!-- TODO: LOGOUT  y mostrar usuario logeado -->
-            </li>            
+            <li *ngIf="userLogedIn == ''" class="nav-item ms-md-auto">
+              <a class="nav-link btn btn-success text-light" href="#" routerLink="/login-signup" routerLinkActive="active">LogIn/SignUp</a>              
+            </li>     
+            <li *ngIf="!(userLogedIn == '')" class="nav-item ms-md-auto">
+              <a class="nav-link btn btn-success text-light" href="#" routerLink="/login-signup" routerLinkActive="active">{{userLogedIn}}</a>              
+            </li>        
           </ul>
         </div>
       </div>

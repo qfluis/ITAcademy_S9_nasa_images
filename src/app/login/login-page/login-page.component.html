@@ -1,5 +1,9 @@
 <div class="d-flex justify-content-center mt-3">
-    <div class="login">
+    <div class *ngIf="userLogedIn">
+        <p>You are loged in with the user {{ userLogedIn }}</p>
+        <button class="btn btn-danger position-absolute start-50 translate-middle mt-3" (click)="logOut()">Log out</button>
+    </div>
+    <div *ngIf="!userLogedIn" class="login">
         <h3 *ngIf="loginMode">Login</h3>
         <h3 *ngIf="!loginMode">Sign up</h3>
         <hr>
@@ -23,10 +27,6 @@
                 <button [disabled]="loginForm.invalid" *ngIf="!loginMode" type="submit" class="btn btn-primary mb-3">Sign Up</button>
             </div>
             <div *ngIf="ultimoError != ''" [ngClass]="{'login-error': (ultimoError != '')}">{{ ultimoError }}</div>
-            <!-- TODO: imprimir respuesta del servidor en caso de error (email duplicado, error conexión...) -->
-            <!-- TODO: Gestionar usuario logeado y log out -->
-            
-
         </form>
     </div>
 </div>

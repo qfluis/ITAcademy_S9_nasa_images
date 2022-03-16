@@ -5,6 +5,7 @@ import { DailyComponent } from './pages/daily/daily.component';
 import { MyFavouritesComponent } from './pages/my-favourites/my-favourites.component';
 import { Page404Component } from './pages/page404/page404.component';
 
+// TODO: proteger rutas!!!
 const routes: Routes = [
   { path:"", redirectTo:"/daily", pathMatch: 'full' },
   { path:"daily", component:DailyComponent },

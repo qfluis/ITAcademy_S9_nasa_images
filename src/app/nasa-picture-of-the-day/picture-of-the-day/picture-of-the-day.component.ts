@@ -18,7 +18,9 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   @ViewChild("videoImg") videoImg!: ElementRef<HTMLIFrameElement>;
 
   pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
-  userLogedIn = this.loginService.userLogedIn;
+  get userLogedIn(){
+    return this.loginService.userLogedIn;
+  } 
 
   constructor(
     private pictureOfTheDay:PictureOfTheDayService,

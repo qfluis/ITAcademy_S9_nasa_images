@@ -14,7 +14,9 @@ export class NasaRoverPhotosComponent implements OnInit, OnChanges {
   maxApiCalls:number = 5;
 
   pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
-  userLogedIn = this.loginService.userLogedIn;
+  get userLogedIn(){
+    return this.loginService.userLogedIn;
+  } 
 
   constructor(
     private nasaRoverPhotosService:NasaRoverPhotosService,

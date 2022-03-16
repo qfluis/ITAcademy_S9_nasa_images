@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 export interface User{
   email:    string,
@@ -15,74 +15,69 @@ export class LoginService {
 
   API_URL = "http://localhost:4000/api/auth";
 
-  userLogedIn:User | undefined;// = { email:'qfluis@gmail.com', password:'123456' }
+  userLogedIn:string = "";
 
   constructor(
     private http:HttpClient
   ) { }
 
-  // TODO: implementar register con BACKEND
   newUser(email:string, password:string){
-    const user:User = { email, password };
-    const respuesta = this.http.post(this.API_URL+"/new", user);
-
-    respuesta.subscribe((resp:any) => {
-      console.log("servicio",resp); 
-      // Si todo ok
-      if(resp.ok === true){        
-        this.userLogedIn = user;
-        this.saveToken(resp.token);
-      }
-    });
-    
-    return respuesta;
-
-
-
-    // enviar petición a backend y devolver feedback...
-    // tener en cuenta, si el usuario ya existe.
-
-    // guardar JWT
-
-    // todo ok
+    const user:User = { email, password };    
+    return this.http.post(this.API_URL+"/new", user)
+      .pipe(
+        tap((resp:any)=>{
+          console.log("servicio",resp); 
+          // Si todo ok
+          if(resp.ok === true){        
+            this.userLogedIn = user.email;
+            this.saveToken(resp.token);
+          }
+        })
+      );
   }
 
   login(email:string, password:string){
-    //enviar petición a backend
     const user = { email, password };
    
-    const respuesta = this.http.post(this.API_URL, user);
-
-    respuesta.subscribe((resp:any) => {
-      console.log("servicio",resp); 
-      // Si todo ok
-      if(resp.ok === true){        
-        this.userLogedIn = user;
-        this.saveToken(resp.token);
-      }
-    });
-    
-    return respuesta;
+    return this.http.post(this.API_URL, user)
+      .pipe(
+        tap((resp:any)=>{
+          console.log("servicio",resp); 
+          // Si todo ok
+          if(resp.ok === true){        
+            this.userLogedIn = user.email;
+            this.saveToken(resp.token);
+          }
+        })
+      );
   }
 
-  // TODO: comprobar Logout ok
-  logout(){
-      this.userLogedIn = undefined;
+  logOut(){
+      this.userLogedIn = "";
       localStorage.setItem("token","");
   }
 
   validateToken(){
-    // TODO: al iniciar app validar token guardado y hacer login si es correcto
+    console.log('hello token');
+    const token = this.loadToken();
+    const url = this.API_URL + "/renew";
+    if(token != undefined && token != ""){
+      // Petición http
+      let httpHeaders:HttpHeaders =new HttpHeaders()
+        .set('x-token',token);
+      this.http.get(url,{ 'headers':httpHeaders }).subscribe((resp:any)=>{
+        if (resp.ok == true){
+          this.userLogedIn = resp.email;
+        }
+      });
+    }
   }
 
-  // TODO: Save Token
   saveToken(token:string) {
     localStorage.setItem("token",token);
   }
 
-  // TODO: Load Token
   loadToken():string {
     return localStorage.getItem("token") || "";
-  }
-
+  }  
 }

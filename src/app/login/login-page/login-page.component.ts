@@ -12,6 +12,9 @@ export class LoginPageComponent implements OnInit {
 
   loginForm!: FormGroup;
   ultimoError:string = "";
+  get userLogedIn() {
+    return this.loginService.userLogedIn;
+  }
 
   constructor(
     private _builder:FormBuilder,
@@ -38,6 +41,7 @@ export class LoginPageComponent implements OnInit {
   sendForm(values:any) {
     if(this.loginMode){
       const respuesta = this.loginService.login(values.userEmail, values.userPass);
+
       respuesta.subscribe((resp:any)=>{
         console.log("componente", resp);
         // Si todo ok
@@ -46,10 +50,12 @@ export class LoginPageComponent implements OnInit {
         } else {
           this.ultimoError = resp.msg;
         }
-      })
+      });
+ 
       
     } else {
       const respuesta = this.loginService.newUser(values.userEmail, values.userPass);
+      
       respuesta.subscribe((resp:any)=>{
         console.log("componente", resp);
         // Si todo ok
@@ -60,11 +66,15 @@ export class LoginPageComponent implements OnInit {
         }
       })
     }
-    // TODO: Mostrar error en login servidor
+    
 
 
 
     //console.log(this.loginMode?"login":"signup", values);
+  }
+
+  logOut(){
+    this.loginService.logOut();
   }
 
 }

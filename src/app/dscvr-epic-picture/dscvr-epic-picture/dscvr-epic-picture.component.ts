@@ -13,7 +13,9 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
   @Input() date = new Date();
   pictureDate:string = "";
   pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
-  userLogedIn = this.loginService.userLogedIn;
+  get userLogedIn(){
+    return this.loginService.userLogedIn;
+  } 
 
   earthPhotos:string[]=[];
 
@@ -24,6 +26,7 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
   ) { }
 
   ngOnInit(): void {
+    
   }
 
   ngAfterContentInit(): void {
@@ -40,7 +43,7 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
       this.pictureDate = resp[0].date.split(" ")[0];
       this.earthPhotos = this.dscvrEpicPicture.getArrayImages(resp);
 
-      // TODO:Peta siempre la primera imagen...
+      // Peta siempre la primera imagen...
       this.earthPhotos.shift();
 
     }), (error:any)=>{

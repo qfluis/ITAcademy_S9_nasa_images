@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, AfterContentInit } from '@angular/core';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'nasa_pictures';
+
+  get userLogedIn(){
+    return this.loginService.userLogedIn;
+  }
+
+  constructor(
+    private loginService:LoginService
+  ){
+    this.loginService.validateToken();
+  }
+
 }
