@@ -1,0 +1,21 @@
+.login {
+    width:100%;
+    max-width:400px;
+}
+.link {
+    cursor:pointer;
+    text-decoration: underline;
+    color: blueviolet;
+    font-weight: bold;
+}
+.warning {
+    color:red;
+}
+
+.login-error {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding:5px;
+    border-radius: 5px;
+}
