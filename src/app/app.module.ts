@@ -11,6 +11,7 @@ import { DscvrEpicPictureModule } from './dscvr-epic-picture/dscvr-epic-picture.
 import { NasaRoverPhotosModule } from './nasa-rover-photos/nasa-rover-photos.module';
 import { LoginModule } from './login/login.module';
 import { MyFavouritesComponent } from './pages/my-favourites/my-favourites.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MyFavouritesComponent } from './pages/my-favourites/my-favourites.compo
     NasaPictureOfTheDayModule,
     DscvrEpicPictureModule,
     NasaRoverPhotosModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

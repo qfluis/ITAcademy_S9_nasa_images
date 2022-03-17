@@ -13,6 +13,7 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
   @Input() date = new Date();
   pictureDate:string = "";
   pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+  
   get userLogedIn(){
     return this.loginService.userLogedIn;
   } 

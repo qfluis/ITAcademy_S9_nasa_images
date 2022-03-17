@@ -18,6 +18,9 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   @ViewChild("videoImg") videoImg!: ElementRef<HTMLIFrameElement>;
 
   pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+
+
+
   get userLogedIn(){
     return this.loginService.userLogedIn;
   } 
@@ -35,6 +38,7 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   ngAfterContentInit(): void {
     //console.log("After Content Init");
     this.chargePicture();
+    
   }
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -76,6 +80,18 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
       this.pictureImg.nativeElement.src = "/assets/img/img_broken.webp";
 
     });
+
+    this.favService.hasFav(this.date, "NASA").subscribe((reps:any)=>{
+      if(reps.ok = true) {
+        this.pictureFav = true;
+      } else {
+        this.pictureFav = false;
+      }
+    })
+
+    
+
+
   }
 
   showImage(){
