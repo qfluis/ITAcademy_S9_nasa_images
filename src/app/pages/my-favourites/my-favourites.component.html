@@ -1,1 +1,8 @@
-<p>my-favourites works!</p>
+<div *ngIf="!(favList.length > 0)" class="alert alert-warning mt-3" >You don't have fav pictures</div>
+<div class="row">
+    <div *ngFor="let item of favList" class="col-12 col-md-6 col-xxl-4">
+        <app-picture-of-the-day *ngIf="item.type == 'NASA'" [date]="item.publishDate" [gallery]="true"></app-picture-of-the-day>
+        <app-dscvr-epic-picture *ngIf="item.type == 'EPIC'" [date]="item.publishDate" [gallery]="true"></app-dscvr-epic-picture>
+        <app-nasa-rover-photos *ngIf="item.type == 'MARS'" [date]="item.publishDate" [gallery]="true"></app-nasa-rover-photos>
+    </div>
+</div>

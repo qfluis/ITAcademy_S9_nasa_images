@@ -30,14 +30,13 @@ export class FavService {
       "type": type,
       "email": this.email
     }
-
     this.http.post(this.apiUrl+'/new', like).subscribe((resp:any)=>{
-        console.log("like guardado!!!"); // TODO: si no hay backend que hacemos?
+        //console.log("like guardado!!!"); // TODO: si no hay backend que hacemos?
     });
   }
 
   removeFavPicture(date:Date, type:string) {
-    console.log(date, type, 'UNFAV');
+    //console.log(date, type, 'UNFAV');
 
     const like = {
       "publishDate": date.toISOString().split("T")[0],
@@ -46,12 +45,12 @@ export class FavService {
     }
 
     this.http.post(this.apiUrl+'/remove', like).subscribe((resp:any)=>{
-        console.log("like borrado!!!"); // TODO: si no hay backend que hacemos?
+        //console.log("like borrado!!!"); // TODO: si no hay backend que hacemos?
     });
   }
 
   hasFav(date:Date, type:string) {    
-    console.log(date, type, "¿has fav?");
+    //console.log(date, type, "¿has fav?");
     
     const like = {
       "publishDate": date.toISOString().split("T")[0],
@@ -59,10 +58,16 @@ export class FavService {
       "email": this.email
     }
 
-    return this.http.post(this.apiUrl+'/new', like);
+    return this.http.post(this.apiUrl+'/haslike', like);
   }
 
   getFavList(){
+    //console.log("Fav List", this.email);
     
+    const search = {
+      "email": this.email
+    }
+
+    return this.http.post(this.apiUrl+'/list', search);
   }
 }

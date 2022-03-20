@@ -63,8 +63,6 @@ export class DscvrEpicPictureService {
     today = new Date(this.formatedDate(today));
     date = new Date(this.formatedDate(date));
 
-    console.log(date.getTime(), today.getTime());
-
     let url:string = `${this.ApiUrl}/${this.formatedDate(date)}?api_key=${this.ApiKey}`;
     
     if (date.getTime() == today.getTime()){
@@ -73,7 +71,6 @@ export class DscvrEpicPictureService {
     } 
       
     
-    console.log("holiwi",url);
     return this.http.get<EpicImage[]>(url);
   }
 

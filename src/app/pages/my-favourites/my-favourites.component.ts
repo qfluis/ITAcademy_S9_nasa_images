@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/login/login.service';
+import { FavService } from '../../shared/fav.service';
+
 
 @Component({
   selector: 'app-my-favourites',
@@ -7,9 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyFavouritesComponent implements OnInit {
 
-  constructor() { }
+  favList:any [] = [] // TODO: tipar
+  get email() {
+    return this.loginService.userLogedIn;
+  }
+
+
+  constructor(
+    private favService:FavService,
+    private loginService:LoginService
+  ) { }
 
   ngOnInit(): void {
+    // TODO: ARREGLAR
+    if(this.email){
+      this.getFavList();
+    } else {
+      setTimeout(()=>{
+        this.getFavList();
+      }, 500);
+    }
+    
+  }
+
+  getFavList() {
+    this.favService.getFavList().subscribe((resp:any)=>{
+      this.favList = resp.data;
+      console.log(this.favList);
+    });
   }
 
 }

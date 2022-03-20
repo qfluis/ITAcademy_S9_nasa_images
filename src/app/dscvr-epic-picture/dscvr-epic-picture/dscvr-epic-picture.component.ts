@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, AfterContentInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, AfterContentInit, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DscvrEpicPictureService, EpicImage } from '../dscvr-epic-picture.service';
 import { LoginService } from '../../login/login.service';
 import { FavService } from '../../shared/fav.service';
@@ -8,11 +8,15 @@ import { FavService } from '../../shared/fav.service';
   templateUrl: './dscvr-epic-picture.component.html',
   styleUrls: ['./dscvr-epic-picture.component.scss']
 })
-export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterContentInit {
+export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterContentInit, AfterViewInit {
 
   @Input() date = new Date();
+  @Input() gallery = false;
+  @ViewChild('carousel') carousel!:ElementRef<HTMLDivElement>;
+  @ViewChild('prev') carouselLeft!:ElementRef<HTMLButtonElement>;
+  @ViewChild('next') carouselRight!:ElementRef<HTMLButtonElement>;
   pictureDate:string = "";
-  pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+  pictureFav:boolean = false;
   
   get userLogedIn(){
     return this.loginService.userLogedIn;
@@ -32,6 +36,20 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
 
   ngAfterContentInit(): void {
     //this.loadPictureList();
+    // TODO: ARREGLAR, espero 500 ms a que se haya cargado el usuario...
+    /*
+    if(!this.gallery){
+      setTimeout(() => this.hasFav(), 500);
+    } else {
+      this.pictureFav = true;
+      console.log(this.date);
+    }*/
+    if(this.gallery) this.pictureFav = true;
+
+    
+  }
+  ngAfterViewInit(): void {
+       
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,17 +57,26 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
   }
 
   loadPictureList(){
+    if(this.gallery) this.date = new Date(this.date);
     this.dscvrEpicPicture.getEarthPicturesOfTheDay(this.date).subscribe(((resp:EpicImage[])=>{
-      
-      this.pictureDate = resp[0].date.split(" ")[0];
-      this.earthPhotos = this.dscvrEpicPicture.getArrayImages(resp);
+      if(resp[0].date){
+        this.pictureDate = resp[0].date.split(" ")[0];
+        this.earthPhotos = this.dscvrEpicPicture.getArrayImages(resp);
 
-      // Peta siempre la primera imagen...
-      this.earthPhotos.shift();
+        // Peta siempre la primera imagen...
+        this.earthPhotos.shift();
+
+        if (!this.gallery) this.hasFav();
+        this.changeCarrouselButtons(); 
+      }
+      
 
     }), (error:any)=>{
       console.log("ERROR NO HAY DATOS DSCVR EPIC");
     });
+
+    //if (!this.gallery) this.hasFav();
+
   }
 
   imgError( event:any ){
@@ -62,16 +89,39 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
     event.target.style.visibility = "visible";
   }
 
+  hasFav() {
+    
+    if (this.userLogedIn && this.pictureDate != ""){
+      this.favService.hasFav(new Date(this.pictureDate), "EPIC").subscribe((resp:any)=>{
+        //console.log("Has fav", resp);
+        if(resp.ok == true) {
+          this.pictureFav = true;
+        } else {
+          this.pictureFav = false;
+        }
+      });
+    }
+    
+  }
+
   favPicture(){
     
     if (!this.pictureFav) {
-      this.favService.favPicture(this.date, 'EPIC');  
+      this.favService.favPicture(new Date(this.pictureDate), 'EPIC');  
       this.pictureFav = true;
     } else {
-      this.favService.removeFavPicture(this.date, 'EPIC');
+      this.favService.removeFavPicture(new Date(this.pictureDate), 'EPIC');
       this.pictureFav = false;
     }
 
+  }
+
+  changeCarrouselButtons(){
+    // Arregla bug cuando hay varios carouseles...
+    const newId = 'carouselFade'+this.pictureDate;
+    this.carousel.nativeElement.setAttribute('id', newId);
+    this.carouselLeft.nativeElement.setAttribute('data-bs-target', '#'+newId);
+    this.carouselRight.nativeElement.setAttribute('data-bs-target', '#'+newId);
   }
 
 }

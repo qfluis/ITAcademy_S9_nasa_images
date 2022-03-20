@@ -67,7 +67,6 @@ export class NasaRoverPhotosService {
     
     let url:string = `${this.ApiUrl}?api_key=${this.ApiKey}&earth_date=${this.formatedDate(date)}&page=1`;
         
-    console.log("Mars",url);
     return this.http.get<MarsPhotos>(url);
   }
 

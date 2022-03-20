@@ -10,7 +10,7 @@ export class DateBarComponent implements OnInit {
 
   date:Date;
 
-  randomDateStart = new Date ("1995-6-16");
+  randomDateStart = new Date ("2015-09-01");
   randomDateEnd = new Date();
 
   @Output() onChangeDate = new EventEmitter<Date>();

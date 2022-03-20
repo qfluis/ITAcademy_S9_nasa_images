@@ -5,7 +5,7 @@ import { DateBarComponent } from '../shared/date-bar/date-bar.component';
 
 export interface Picture {
   copyright?:       string;
-  date?:            Date;
+  date?:            string;
   explanation?:     string;
   hdurl?:           string;
   media_type?:      string;
@@ -29,7 +29,6 @@ export class PictureOfTheDayService {
   ) { }  
 
   getPictureOfOneDay (date:Date):Observable<Picture> {
-    //console.log(`${this.ApiUrl}?api_key=${this.ApiKey}&date=${this.formatedDate(date)}`);
     return this.http.get<Picture>(`${this.ApiUrl}?api_key=${this.ApiKey}&date=${this.formatedDate(date)}`);
   }
 

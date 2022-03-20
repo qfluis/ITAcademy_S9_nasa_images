@@ -11,13 +11,15 @@ import { Picture, PictureOfTheDayService } from '../picture-of-the-day.service';
 export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContentInit {
 
   @Input() date = new Date();
+  @Input() gallery = false;
   picture:Picture={};
   @ViewChild("pictureContainer") pictureContainer!:ElementRef<HTMLDivElement>;
   @ViewChild("pictureImg") pictureImg!: ElementRef<HTMLImageElement>;
   @ViewChild("videoContainer") videoContainer!:ElementRef<HTMLDivElement>;
   @ViewChild("videoImg") videoImg!: ElementRef<HTMLIFrameElement>;
 
-  pictureFav:boolean = false;  // TODO: comprobar si tiene o no Fav
+  pictureFav:boolean = false;
+  pictureDate:string = "";
 
 
 
@@ -35,25 +37,32 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
     //this.chargePicture();
   }
 
-  ngAfterContentInit(): void {
-    //console.log("After Content Init");
-    this.chargePicture();
+  ngAfterContentInit() {
+    //this.chargePicture();
+    // TODO: ARREGLAR, espero 500 ms a que se haya cargado el usuario...
+    /*
+    if(!this.gallery){
+      setTimeout(() => this.hasFav(), 500);
+    } else {
+      this.pictureFav = true;
+    }*/
+    if(this.gallery) this.pictureFav = true;
     
+  
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    //console.log("changes");
     this.chargePicture();
   }
 
   chargePicture(){
     
     //this.pictureImg.nativeElement.hidden = true;
+    if(this.gallery) this.date = new Date(this.date);
+
     this.pictureOfTheDay.getPictureOfOneDay(this.date).subscribe((resp:Picture) => {
-      //console.log("respuesta", resp);
       this.picture = resp;
-
-
+      this.pictureDate = resp.date || "";
             
       if (this.picture.media_type == 'image') {
         this.pictureImg.nativeElement.classList.add("invisible");
@@ -67,11 +76,13 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
         this.videoContainer.nativeElement.classList.remove("d-none");
         this.pictureContainer.nativeElement.classList.add("d-none");       
       }  
+      if (!this.gallery) this.hasFav();
 
     }, (error:any) => {
-
+      this.pictureDate = "";
       this.picture = {
         title: "Image of the day not available",
+        date: "",
         explanation: `${ error.error.msg } Please, try another date.`,
         url: "/assets/img/img_broken.webp",
         media_type: "image"
@@ -80,18 +91,22 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
       this.pictureImg.nativeElement.src = "/assets/img/img_broken.webp";
 
     });
-
-    this.favService.hasFav(this.date, "NASA").subscribe((reps:any)=>{
-      if(reps.ok = true) {
-        this.pictureFav = true;
-      } else {
-        this.pictureFav = false;
-      }
-    })
-
     
+  }
 
-
+  hasFav() {
+    
+    if (this.userLogedIn){
+      this.favService.hasFav(new Date(this.pictureDate), "NASA").subscribe((resp:any)=>{
+        //console.log("Has fav", resp);
+        if(resp.ok == true) {
+          this.pictureFav = true;
+        } else {
+          this.pictureFav = false;
+        }
+      });
+    }
+    
   }
 
   showImage(){
@@ -100,10 +115,10 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
 
   favPicture(){    
     if (!this.pictureFav) {
-      this.favService.favPicture(this.date, 'NASA');  
+      this.favService.favPicture(new Date(this.pictureDate), 'NASA');  
       this.pictureFav = true;
     } else {
-      this.favService.removeFavPicture(this.date, 'NASA');
+      this.favService.removeFavPicture(new Date(this.pictureDate), 'NASA');
       this.pictureFav = false;
     }
   }

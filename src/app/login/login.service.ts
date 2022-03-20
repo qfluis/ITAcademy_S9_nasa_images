@@ -26,7 +26,6 @@ export class LoginService {
     return this.http.post(this.API_URL+"/new", user)
       .pipe(
         tap((resp:any)=>{
-          console.log("servicio",resp); 
           // Si todo ok
           if(resp.ok === true){        
             this.userLogedIn = user.email;
@@ -42,7 +41,6 @@ export class LoginService {
     return this.http.post(this.API_URL, user)
       .pipe(
         tap((resp:any)=>{
-          console.log("servicio",resp); 
           // Si todo ok
           if(resp.ok === true){        
             this.userLogedIn = user.email;
@@ -58,7 +56,6 @@ export class LoginService {
   }
 
   validateToken(){
-    console.log('hello token');
     const token = this.loadToken();
     const url = this.API_URL + "/renew";
     if(token != undefined && token != ""){
