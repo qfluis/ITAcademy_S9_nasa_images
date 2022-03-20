@@ -38,16 +38,8 @@ export class PictureOfTheDayComponent implements OnInit, OnChanges, AfterContent
   }
 
   ngAfterContentInit() {
-    //this.chargePicture();
-    // TODO: ARREGLAR, espero 500 ms a que se haya cargado el usuario...
-    /*
-    if(!this.gallery){
-      setTimeout(() => this.hasFav(), 500);
-    } else {
-      this.pictureFav = true;
-    }*/
-    if(this.gallery) this.pictureFav = true;
     
+    if(this.gallery) this.pictureFav = true;   
   
   }
   

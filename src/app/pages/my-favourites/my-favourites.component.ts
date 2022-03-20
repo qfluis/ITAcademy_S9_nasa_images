@@ -22,7 +22,7 @@ export class MyFavouritesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // TODO: ARREGLAR
+    // TODO: ARREGLAR (espera 500ms a login para obtener lista de Favs)
     if(this.email){
       this.getFavList();
     } else {

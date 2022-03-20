@@ -7,11 +7,11 @@
         <h3 *ngIf="loginMode">Login</h3>
         <h3 *ngIf="!loginMode">Sign up</h3>
         <hr>
-        <div *ngIf="loginMode" >If you are a new user please <span class="link" (click)="switchMode()" >sign up</span> first</div>
+        <div *ngIf="loginMode">If you are a new user please <span class="link" (click)="switchMode()" >sign up</span> first</div>
         <div *ngIf="!loginMode" >If you have a user please <span class="link" (click)="switchMode()" >login</span></div>
                 
         <form [formGroup]="loginForm" (ngSubmit)="sendForm( loginForm.value )">
-            <div class="mb-3">
+            <div class="mb-3 mt-3">
                 <label for="controlInput1" class="form-label">Email address</label>
                 <input formControlName="userEmail" type="email" class="form-control" id="controlInput1" placeholder="my@email.com">
                 <div class="warning"  *ngIf="loginForm.get('userEmail')?.hasError('email')">Debes introducir un email válido</div>

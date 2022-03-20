@@ -8,7 +8,10 @@ import { LoginService } from './login/login.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  
+  get userLogedIn() {
+    return this.loginService.userLogedIn;
+  }
+
   constructor(
     private loginService:LoginService,
     private router:Router
@@ -18,7 +21,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    if (this.loginService.userLogedIn != ""){
+    if (this.userLogedIn != ""){
       return true;
     } else {
       this.router.navigate(['login-signup']);

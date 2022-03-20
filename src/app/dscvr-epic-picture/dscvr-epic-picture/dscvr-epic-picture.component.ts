@@ -35,18 +35,8 @@ export class DscvrEpicPictureComponent implements OnInit, OnChanges, AfterConten
   }
 
   ngAfterContentInit(): void {
-    //this.loadPictureList();
-    // TODO: ARREGLAR, espero 500 ms a que se haya cargado el usuario...
-    /*
-    if(!this.gallery){
-      setTimeout(() => this.hasFav(), 500);
-    } else {
-      this.pictureFav = true;
-      console.log(this.date);
-    }*/
-    if(this.gallery) this.pictureFav = true;
 
-    
+    if(this.gallery) this.pictureFav = true;    
   }
   ngAfterViewInit(): void {
        

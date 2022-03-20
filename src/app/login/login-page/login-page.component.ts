@@ -66,11 +66,6 @@ export class LoginPageComponent implements OnInit {
         }
       })
     }
-    
-
-
-
-    //console.log(this.loginMode?"login":"signup", values);
   }
 
   logOut(){

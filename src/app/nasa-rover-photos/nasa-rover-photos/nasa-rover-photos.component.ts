@@ -38,17 +38,7 @@ export class NasaRoverPhotosComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }  
 
-  ngAfterContentInit(): void {
-    //this.loadPictureList();
-    // TODO: ARREGLAR, espero 500 ms a que se haya cargado el usuario...
-    
-    /*
-    if(!this.gallery){
-      setTimeout(() => this.hasFav(), 500);
-    } else {
-      this.pictureFav = true;
-      console.log(this.date);
-    }*/
+  ngAfterContentInit(): void {    
     if(this.gallery) this.pictureFav = true;
   }
 

@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+$primary: #A200FF;
+$primary2: #d386ff;
+$secondary: #738C00;
+$secondary2: #B7D921;
+
+.navbar {
+    background-color: white!important;
+    border-bottom: 1px solid $primary;
+}
+.nav-item .active{
+    color: $primary!important;
+}
+
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.btn-primary:hover {
+    background-color: $primary2;
+}
+
+.btn-primary:active, .btn-primary:focus, .btn-primary:visited {
+    background-color: $primary!important;
+    color: white!important;
+}
+
+.btn-secondary {
+    background-color: $secondary;
+    border-color: $secondary;
+}
+
+.btn-secondary:hover {
+    background-color: $secondary2;
+}
+
+.btn-secondary:active, .btn-secondary:focus {
+    background-color: $secondary;
+}
+
+
+
+/*
+.nav-item .active{
+    color: $primary!important;
+}*/
