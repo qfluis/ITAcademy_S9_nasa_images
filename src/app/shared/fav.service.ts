@@ -22,7 +22,7 @@ export class FavService {
   // EPIC, NASA, MARS
 
   favPicture(date:Date, type:string) {
-    console.log(date, type, "FAV");
+    //console.log(date, type, "FAV");
     
     const like = {
       "publishDate": date.toISOString().split("T")[0],

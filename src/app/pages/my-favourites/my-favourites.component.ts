@@ -10,7 +10,7 @@ import { FavService } from '../../shared/fav.service';
 })
 export class MyFavouritesComponent implements OnInit {
 
-  favList:any [] = [] // TODO: tipar
+  favList:any [] = []; // TODO: tipar
   get email() {
     return this.loginService.userLogedIn;
   }
@@ -35,8 +35,8 @@ export class MyFavouritesComponent implements OnInit {
 
   getFavList() {
     this.favService.getFavList().subscribe((resp:any)=>{
-      this.favList = resp.data;
-      console.log(this.favList);
+      this.favList = resp.data || [];
+      //console.log(this.favList);
     });
   }
 

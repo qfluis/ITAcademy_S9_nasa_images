@@ -3,6 +3,7 @@ $primary: #A200FF;
 $primary2: #d386ff;
 $secondary: #738C00;
 $secondary2: #B7D921;
+$disabled: rgba(128, 128, 128, 0.479);
 
 .navbar {
     background-color: white!important;
@@ -19,10 +20,21 @@ $secondary2: #B7D921;
 
 .btn-primary:hover {
     background-color: $primary2;
+    border-color: $primary;
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:visited {
     background-color: $primary!important;
+    border-color: $primary!important;
+    color: white!important;
+
+    box-shadow: 0 0 0 5px $primary2;
+
+}
+
+.btn-primary:disabled {
+    background-color: $disabled!important;
+    border-color: $primary;
     color: white!important;
 }
 

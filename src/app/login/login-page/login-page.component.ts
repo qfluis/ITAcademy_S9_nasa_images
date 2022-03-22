@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
       const respuesta = this.loginService.login(values.userEmail, values.userPass);
 
       respuesta.subscribe((resp:any)=>{
-        console.log("componente", resp);
+        //console.log("componente", resp);
         // Si todo ok
         if(resp.ok === true){        
           this.router.navigate(["/"]);
@@ -57,7 +57,7 @@ export class LoginPageComponent implements OnInit {
       const respuesta = this.loginService.newUser(values.userEmail, values.userPass);
       
       respuesta.subscribe((resp:any)=>{
-        console.log("componente", resp);
+        //console.log("componente", resp);
         // Si todo ok
         if(resp.ok === true){        
           this.router.navigate(["/"]);

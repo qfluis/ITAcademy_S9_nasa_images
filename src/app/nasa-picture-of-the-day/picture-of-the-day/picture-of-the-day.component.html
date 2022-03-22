@@ -8,7 +8,7 @@
     </div>
     <hr>
     <div #pictureContainer class="img-container row "> <!-- *ngIf="picture.media_type == 'image'" -->
-        <img  #pictureImg class="img-fluid rounded mx-auto" (load)="showImage()">
+        <img  #pictureImg loading="lazy" class="img-fluid rounded mx-auto" (load)="showImage()">
     </div>
     <div #videoContainer class="video-responsive"> <!-- *ngIf="picture.media_type == 'video'"  -->
         <iframe #videoImg                
