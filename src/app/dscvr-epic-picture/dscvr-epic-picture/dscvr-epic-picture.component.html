@@ -1,0 +1,29 @@
+<div class="border border-light pt-3 pb-3 p-sm-3 mt-3 shadow-sm rounded">
+  <div class="row align-items-center">
+    <div class="col-10">
+      <h6 class="ps-3 pe-3  text-secondary">DSCVR Epic Pictures</h6>
+      <h3 class="ps-3 pe-3 ">Earth {{ pictureDate }}</h3>
+    </div>
+    <app-like [like]="pictureFav" *ngIf="userLogedIn" class="col-2" (click)="favPicture()" ></app-like>
+  </div>
+  <hr>
+
+  <div #carousel id="carouselFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="false" >
+    <div class="carousel-inner">      
+      
+      <div *ngFor='let img of earthPhotos; let primero = first;' [ngClass]='{active:primero}' class="carousel-item" >
+        <img [src]="img" loading="lazy" class="d-block w-100" alt="" (error)="imgError( $event )" (load)="imgLoad( $event )">
+      </div>
+      
+        
+    </div>
+    <button #prev class="carousel-control-prev" type="button" data-bs-target="#carouselFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button #next class="carousel-control-next" type="button" data-bs-target="#carouselFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>  
+</div>

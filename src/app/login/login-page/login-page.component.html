@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center mt-3">
+    <div class *ngIf="userLogedIn">
+        <p>You are loged in with the user {{ userLogedIn }}</p>
+        <button class="btn btn-danger position-absolute start-50 translate-middle mt-3" (click)="logOut()">Log out</button>
+    </div>
+    <div *ngIf="!userLogedIn" class="login">
+        <h3 *ngIf="loginMode">Login</h3>
+        <h3 *ngIf="!loginMode">Sign up</h3>
+        <hr>
+        <div *ngIf="loginMode">If you are a new user please <span class="link" (click)="switchMode()" >sign up</span> first</div>
+        <div *ngIf="!loginMode" >If you have a user please <span class="link" (click)="switchMode()" >login</span></div>
+                
+        <form [formGroup]="loginForm" (ngSubmit)="sendForm( loginForm.value )">
+            <div class="mb-3 mt-3">
+                <label for="controlInput1" class="form-label">Email address</label>
+                <input formControlName="userEmail" type="email" class="form-control" id="controlInput1" placeholder="my@email.com">
+                <div class="warning"  *ngIf="loginForm.get('userEmail')?.hasError('email')">Debes introducir un email válido</div>
+
+            </div>
+            <div class="mb-3">
+                <label for="controlInput2" class="form-label">Password</label>
+                <input formControlName="userPass" type="password" class="form-control" id="controlInput2">
+                <div class="warning"  *ngIf="loginForm.get('userPass')?.hasError('minlength')">Debes introducir un valor de al menos 6 dígitos</div>
+            </div>
+            <div class="mb-3">
+                <button [disabled]="loginForm.invalid" *ngIf="loginMode" type="submit" class="btn btn-primary mb-3">Login</button>
+                <button [disabled]="loginForm.invalid" *ngIf="!loginMode" type="submit" class="btn btn-primary mb-3">Sign Up</button>
+            </div>
+            <div *ngIf="ultimoError != ''" [ngClass]="{'login-error': (ultimoError != '')}">{{ ultimoError }}</div>
+        </form>
+    </div>
+</div>

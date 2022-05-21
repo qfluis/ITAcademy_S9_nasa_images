@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DateServiceService } from './date-service.service';
+import { FavService } from './fav.service';
 
-describe('DateServiceService', () => {
-  let service: DateServiceService;
+describe('FavService', () => {
+  let service: FavService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DateServiceService);
+    service = TestBed.inject(FavService);
   });
 
   it('should be created', () => {

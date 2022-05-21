@@ -1,0 +1,9 @@
+.carousel-item{
+    background-image: url("/assets/img/loading-gif.gif")!important;
+    background-position: center center!important;
+    background-size: 80px 80px!important;
+    background-repeat:no-repeat!important;   
+}
+.carousel-item img{
+    visibility:hidden;
+}

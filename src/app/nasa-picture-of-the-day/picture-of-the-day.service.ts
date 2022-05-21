@@ -5,7 +5,7 @@ import { DateBarComponent } from '../shared/date-bar/date-bar.component';
 
 export interface Picture {
   copyright?:       string;
-  date?:            Date;
+  date?:            string;
   explanation?:     string;
   hdurl?:           string;
   media_type?:      string;
@@ -19,26 +19,22 @@ export interface Picture {
 })
 export class PictureOfTheDayService {
 
-  private _date:Date;
   private ApiUrl:string = 'https://api.nasa.gov/planetary/apod';
   private ApiKey:string = 'm1miLkIg5G4D7cM0gMZwh3uh4cu0P73I4vodaeWi';
 
+  
+
   constructor(
     private http:HttpClient
-  ) {
-    this._date = new Date();
-    //console.log(this.date.toISOString());
+  ) { }  
+
+  getPictureOfOneDay (date:Date):Observable<Picture> {
+    return this.http.get<Picture>(`${this.ApiUrl}?api_key=${this.ApiKey}&date=${this.formatedDate(date)}`);
   }
 
-  getPictureOfTheDay ():Observable<Picture> {
-    return this.http.get<Picture>(`${this.ApiUrl}?api_key=${this.ApiKey}`);
-  }
-
-  set date(date:Date) {
-    this._date = date;
-    console.log(this._date);
-  }
-
+  formatedDate(date:Date):string {
+    return date.toISOString().split("T")[0];
+  };  
 }
 
 /*

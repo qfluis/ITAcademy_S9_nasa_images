@@ -1,0 +1,23 @@
+$primary: #A200FF;
+
+.login {
+    width:100%;
+    max-width:400px;
+}
+.link {
+    cursor:pointer;
+    text-decoration: underline;
+    color: $primary;
+    font-weight: bold;
+}
+.warning {
+    color:red;
+}
+
+.login-error {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding:5px;
+    border-radius: 5px;
+}
