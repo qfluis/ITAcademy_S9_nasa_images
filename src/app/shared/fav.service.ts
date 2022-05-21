@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavService { 
 
-  apiUrl = 'http://localhost:4000/api/like';
+  apiUrl = environment.backendFav;//'http://localhost:4000/api/like';
 
   get email() {
     return this.loginService.userLogedIn;
@@ -20,6 +21,7 @@ export class FavService {
   ) { }
 
   // EPIC, NASA, MARS
+  // TODO: ENVIAR JWT con petición
 
   favPicture(date:Date, type:string) {
     //console.log(date, type, "FAV");

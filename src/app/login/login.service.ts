@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 export interface User{
   email:    string,
@@ -13,7 +14,7 @@ export interface User{
 
 export class LoginService {
 
-  API_URL = "http://localhost:4000/api/auth";
+  API_URL = environment.backendAuth;//"http://localhost:4000/api/auth";
 
   userLogedIn:string = "";
 

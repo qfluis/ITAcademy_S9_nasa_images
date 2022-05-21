@@ -1,0 +1,13 @@
+main { /* Para poder posicionar correctamente el footer */
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer a {
+    color:white;
+}

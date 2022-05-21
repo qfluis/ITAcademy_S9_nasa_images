@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/daily">Nasa Pictures</a>
+        <a class="navbar-brand" routerLink="/daily"><img src="../assets/img/nasa-logo.svg" height="50" />Pics</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,8 +26,12 @@
     </nav>
   </header>
   <router-outlet></router-outlet>
-  <footer class="m-0 mt-5 bg-dark text-light p-5">
-    <p>&copy; Luis Quevedo</p>
-    <p>Contact: <a>qfluis@gmail.com</a></p>
+  <footer class="m-0 mt-auto bg-dark text-light p-5">
+    <ul>
+      <li><h3>&copy; Luis Quevedo</h3></li>
+      <li><img src="../assets/img/gmail.svg" width="24" alt="email" class="me-2" ><a href="mailto:qfluis@gmail.com">qfluis@gmail.com</a></li>
+      <li><img src="../assets/img/linkedin.svg" width="24" alt="linkedin" class="me-2" ><a href="https://www.linkedin.com/in/luisquevedoferreiros/">luisquevedoferreiros</a></li>
+      <li><img src="../assets/img/github.svg" width="24" alt="github" class="me-2" ><a href="https://github.com/qfluis">qfluis</a></li>
+    </ul>
   </footer>
 </main>
